@@ -1,0 +1,18 @@
+{:paths ["src" "test"]
+ :deps
+ {com.etzhayyim/mio
+  {:git/url "https://github.com/etzhayyim/com-etzhayyim-mio"
+   :git/sha "a0b6697f3708d67e0bda2a23fe4ab853555aed0d"}
+  com.etzhayyim/tawami
+  {:git/url "https://github.com/etzhayyim/com-etzhayyim-tawami"
+   :git/sha "f8c8011124319953c5775beb3879d299e433c48f"}
+  com.etzhayyim/okibi
+  {:git/url "https://github.com/etzhayyim/com-etzhayyim-okibi"
+   :git/sha "2cffb76d15da8c37ceb212bed817c8c5700e0eb6"}
+  com.etzhayyim/toi
+  {:git/url "https://github.com/etzhayyim/com-etzhayyim-toi"
+   :git/sha "973cb4deacff97b9b5259053fdf36d9c940f3552"}
+  com.etzhayyim/yudane
+  {:git/url "https://github.com/etzhayyim/com-etzhayyim-yudane"
+   :git/sha "6e80373d226add518a9eb841ced288b626c18a5a"}}
+ :tasks {:test {:task (shell "./run_tests.sh")}}}

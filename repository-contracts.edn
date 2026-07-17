@@ -1,0 +1,10 @@
+{:repository/id etzhayyim/com-etzhayyim-energy-order
+ :repository/category :protocol-suite
+ :canonical-format :edn
+ :dependency-direction :orchestrator-depends-on-actors
+ :pinned-actors
+ {etzhayyim/com-etzhayyim-mio "a0b6697f3708d67e0bda2a23fe4ab853555aed0d"
+  etzhayyim/com-etzhayyim-tawami "f8c8011124319953c5775beb3879d299e433c48f"
+  etzhayyim/com-etzhayyim-okibi "2cffb76d15da8c37ceb212bed817c8c5700e0eb6"
+  etzhayyim/com-etzhayyim-toi "973cb4deacff97b9b5259053fdf36d9c940f3552"
+  etzhayyim/com-etzhayyim-yudane "6e80373d226add518a9eb841ced288b626c18a5a"}}

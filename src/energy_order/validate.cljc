@@ -17,6 +17,7 @@
   Pure / offline. A green run means no charter-gate has silently regressed across
   the suite. Reused as a regression guard (test_validate.cljc)."
   (:require [clojure.edn :as edn]
+            [clojure.java.io :as io]
             [clojure.string :as str]
             [mio.methods.mio-edn :as mio-edn]
             [mio.methods.analyze :as mio-a]
@@ -29,8 +30,12 @@
             [yudane.methods.yudane-edn :as yudane-edn]
             [yudane.methods.analyze :as yudane-a]))
 
+(defn- resource-path [path]
+  (or (io/resource path)
+      (throw (ex-info "Energy Order dependency resource missing" {:resource path}))))
+
 (defn- tx-data?
-  "20-actors/mio/kotoba/ontology.mio.edn and 20-actors/yudane/kotoba/ontology.yudane.edn
+  "The mio and yudane ontology resources
   are now Datomic/Datascript tx-data on disk (ADR-2606230001 fan-out, 2026-07); the other
   suite ontologies (tawami/okibi/toi) are not yet migrated and stay plain top-level maps.
   Tolerate both so this shared reader keeps working for every actor regardless of
@@ -56,34 +61,36 @@
 ;; per-actor spec: how to read its ontology, render its full datoms, and list its seed ids
 (def specs
   [{:actor "mio"
-    :ontology "20-actors/mio/kotoba/ontology.mio.edn"
+    :ontology (resource-path "mio/kotoba/ontology.mio.edn")
     :datoms (fn [] (mio-a/render-datoms
-                    (mio-a/analyze (mio-edn/claims "20-actors/mio/kotoba/seed.edn"))))
-    :ids (fn [] (map :id (mio-edn/claims "20-actors/mio/kotoba/seed.edn")))}
+                    (mio-a/analyze (mio-edn/claims (resource-path "mio/kotoba/seed.edn")))))
+    :ids (fn [] (map :id (mio-edn/claims (resource-path "mio/kotoba/seed.edn"))))}
    {:actor "tawami"
-    :ontology "20-actors/tawami/kotoba/ontology.tawami.edn"
+    :ontology (resource-path "tawami/kotoba/ontology.tawami.edn")
     :datoms (fn [] (tawami-a/render-datoms
-                    (tawami-a/analyze (tawami-edn/assets "20-actors/tawami/kotoba/seed.edn"))))
-    :ids (fn [] (map :id (tawami-edn/assets "20-actors/tawami/kotoba/seed.edn")))}
+                    (tawami-a/analyze (tawami-edn/assets (resource-path "tawami/kotoba/seed.edn")))))
+    :ids (fn [] (map :id (tawami-edn/assets (resource-path "tawami/kotoba/seed.edn"))))}
    {:actor "okibi"
-    :ontology "20-actors/okibi/kotoba/ontology.okibi.edn"
-    :datoms (fn [] (let [s (okibi-edn/sources "20-actors/okibi/kotoba/seed.edn")
-                         k (okibi-edn/sinks "20-actors/okibi/kotoba/seed.edn")]
+    :ontology (resource-path "okibi/kotoba/ontology.okibi.edn")
+    :datoms (fn [] (let [p (resource-path "okibi/kotoba/seed.edn")
+                         s (okibi-edn/sources p)
+                         k (okibi-edn/sinks p)]
                      (okibi-a/render-datoms (okibi-a/analyze s k))))
-    :ids (fn [] (concat (map :id (okibi-edn/sources "20-actors/okibi/kotoba/seed.edn"))
-                        (map :id (okibi-edn/sinks "20-actors/okibi/kotoba/seed.edn"))))}
+    :ids (fn [] (let [p (resource-path "okibi/kotoba/seed.edn")]
+                  (concat (map :id (okibi-edn/sources p)) (map :id (okibi-edn/sinks p)))))}
    {:actor "toi"
-    :ontology "20-actors/toi/kotoba/ontology.toi.edn"
-    :datoms (fn [] (let [j (toi-edn/jobs "20-actors/toi/kotoba/seed.edn")
-                         s (toi-edn/sites "20-actors/toi/kotoba/seed.edn")]
+    :ontology (resource-path "toi/kotoba/ontology.toi.edn")
+    :datoms (fn [] (let [p (resource-path "toi/kotoba/seed.edn")
+                         j (toi-edn/jobs p)
+                         s (toi-edn/sites p)]
                      (toi-a/render-datoms (toi-a/analyze j s))))
-    :ids (fn [] (concat (map :id (toi-edn/jobs "20-actors/toi/kotoba/seed.edn"))
-                        (map :id (toi-edn/sites "20-actors/toi/kotoba/seed.edn"))))}
+    :ids (fn [] (let [p (resource-path "toi/kotoba/seed.edn")]
+                  (concat (map :id (toi-edn/jobs p)) (map :id (toi-edn/sites p)))))}
    {:actor "yudane"
-    :ontology "20-actors/yudane/kotoba/ontology.yudane.edn"
+    :ontology (resource-path "yudane/kotoba/ontology.yudane.edn")
     :datoms (fn [] (yudane-a/render-datoms
-                    (yudane-a/analyze (yudane-edn/offers "20-actors/yudane/kotoba/seed.edn"))))
-    :ids (fn [] (map :id (yudane-edn/offers "20-actors/yudane/kotoba/seed.edn")))}])
+                    (yudane-a/analyze (yudane-edn/offers (resource-path "yudane/kotoba/seed.edn")))))
+    :ids (fn [] (map :id (yudane-edn/offers (resource-path "yudane/kotoba/seed.edn"))))}])
 
 (defn leaks-in
   "The unrepresentable attrs that ACTUALLY appear in the datom EDN string (a leak).

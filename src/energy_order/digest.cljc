@@ -24,13 +24,18 @@
             [toi.methods.claim :as toi-claim]
             [yudane.methods.yudane-edn :as yudane-edn]
             [yudane.methods.claim :as yudane-claim]
+            [clojure.java.io :as io]
             [clojure.string :as str]))
 
+(defn- resource-path [path]
+  (or (io/resource path)
+      (throw (ex-info "Energy Order dependency resource missing" {:resource path}))))
+
 (def ^:private default-seeds
-  {:tawami "20-actors/tawami/kotoba/seed.edn"
-   :okibi  "20-actors/okibi/kotoba/seed.edn"
-   :toi    "20-actors/toi/kotoba/seed.edn"
-   :yudane "20-actors/yudane/kotoba/seed.edn"})
+  {:tawami (resource-path "tawami/kotoba/seed.edn")
+   :okibi  (resource-path "okibi/kotoba/seed.edn")
+   :toi    (resource-path "toi/kotoba/seed.edn")
+   :yudane (resource-path "yudane/kotoba/seed.edn")})
 
 (defn all-claims
   "Compose the four legs' flow-improvement claims from their seeds."

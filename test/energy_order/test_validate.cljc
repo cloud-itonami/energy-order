@@ -1,6 +1,6 @@
 #!/usr/bin/env bb
 ;; Energy Order Protocol — suite integrity validator tests.
-;; Run:  bb --classpath 20-actors 20-actors/energy_order/test_validate.cljc
+;; Run:  bb test/energy_order/test_validate.cljc
 (ns energy-order.test-validate
   (:require [energy-order.validate :as v]
             [clojure.test :refer [deftest is run-tests]]))

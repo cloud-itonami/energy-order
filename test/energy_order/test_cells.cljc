@@ -1,6 +1,6 @@
 #!/usr/bin/env bb
 ;; Energy Order Protocol — cell-runner `fire` contract tests for all five actors.
-;; Run:  bb --classpath 20-actors 20-actors/energy_order/test_cells.cljc
+;; Run:  bb test/energy_order/test_cells.cljc
 (ns energy-order.test-cells
   (:require [mio.cell :as mio-cell]
             [tawami.cell :as tawami-cell]
@@ -11,7 +11,7 @@
             [clojure.java.io :as io]
             [clojure.test :refer [deftest is run-tests]]))
 
-(defn- tmp [n] (str "20-actors/energy_order/data/test-cell-" n ".kotoba.edn"))
+(defn- tmp [n] (str "data/test-cell-" n ".kotoba.edn"))
 (defn- clean! [p] (let [f (io/file p)] (when (.exists f) (.delete f))))
 
 (defn- check-cell [fire n]

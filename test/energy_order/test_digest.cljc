@@ -1,6 +1,6 @@
 #!/usr/bin/env bb
 ;; Energy Order Protocol — cross-actor digest tests.
-;; Run:  bb --classpath 20-actors 20-actors/energy-order/test_digest.cljc
+;; Run:  bb test/energy_order/test_digest.cljc
 (ns energy-order.test-digest
   (:require [energy-order.digest :as d]
             [clojure.string :as str]
