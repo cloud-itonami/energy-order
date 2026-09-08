@@ -3,7 +3,7 @@
 ;; Run:  bb test/energy_order/test_digest.cljc
 (ns energy-order.test-digest
   (:require [energy-order.digest :as d]
-            [clojure.string :as str]
+            [kotoba.lang.text :as str]
             [clojure.test :refer [deftest is run-tests]]))
 
 (defn- s [] (d/summary (d/all-claims)))
