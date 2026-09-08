@@ -18,7 +18,7 @@
   the suite. Reused as a regression guard (test_validate.cljc)."
   (:require [clojure.edn :as edn]
             [clojure.java.io :as io]
-            [clojure.string :as str]
+            [kotoba.lang.text :as str]
             [mio.methods.mio-edn :as mio-edn]
             [mio.methods.analyze :as mio-a]
             [tawami.methods.tawami-edn :as tawami-edn]

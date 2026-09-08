@@ -25,7 +25,7 @@
             [yudane.methods.yudane-edn :as yudane-edn]
             [yudane.methods.claim :as yudane-claim]
             [clojure.java.io :as io]
-            [clojure.string :as str]))
+            [kotoba.lang.text :as str]))
 
 (defn- resource-path [path]
   (or (io/resource path)
