@@ -1,6 +1,6 @@
 #!/usr/bin/env bb
 ;; Energy Order Protocol — cross-actor digest tests.
-;; Run:  bb test/energy_order/test_digest.cljc
+;; Run:  bb test/energy_order/test_digest.cljk
 (ns energy-order.test-digest
   (:require [energy-order.digest :as d]
             [kotoba.lang.text :as str]

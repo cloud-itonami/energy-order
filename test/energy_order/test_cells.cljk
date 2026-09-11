@@ -1,6 +1,6 @@
 #!/usr/bin/env bb
 ;; Energy Order Protocol — cell-runner `fire` contract tests for all five actors.
-;; Run:  bb test/energy_order/test_cells.cljc
+;; Run:  bb test/energy_order/test_cells.cljk
 (ns energy-order.test-cells
   (:require [mio.cell :as mio-cell]
             [tawami.cell :as tawami-cell]
