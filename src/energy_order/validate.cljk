@@ -1,4 +1,4 @@
-#!/usr/bin/env bb
+#!/usr/bin/env kbb
 ;; Energy Order Protocol — suite-wide INTEGRITY validator (ontology ⊨ code).
 (ns energy-order.validate
   "validate.cljc — the Energy Order Protocol self-validating integrity checker.

@@ -1,4 +1,4 @@
-#!/usr/bin/env bb
+#!/usr/bin/env kbb
 ;; Energy Order Protocol — cross-actor DIGEST (the suite SSoT / orchestrator).
 (ns energy-order.digest
   "digest.cljc — the Energy Order Protocol cross-actor composition (ADR-2606211200).
