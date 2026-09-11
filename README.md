@@ -32,8 +32,8 @@ verifiable CID.
 
 ```bash
 ./20-actors/energy_order/run_tests.sh                               # digest + cells + validate
-bb --classpath 20-actors 20-actors/energy_order/digest.cljc         # render the cross-actor digest
-bb --classpath 20-actors 20-actors/energy_order/validate.cljc       # suite integrity (ontology ⊨ code)
+kbb --classpath 20-actors 20-actors/energy_order/digest.cljc         # render the cross-actor digest
+kbb --classpath 20-actors 20-actors/energy_order/validate.cljc       # suite integrity (ontology ⊨ code)
 ```
 
 Current seed run: 25 claims (tawami 12 / okibi 4 / toi 5 / yudane 4) → mio verifies 23 →
