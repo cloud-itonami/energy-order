@@ -1,7 +1,7 @@
 #!/usr/bin/env bb
 ;; Energy Order Protocol — write-surface CONFORMANCE: every leg's emitted claims
 ;; validate against the com.etzhayyim.mio.flowClaim lexicon.
-;; Run:  bb test/energy_order/test_conformance.cljc
+;; Run:  bb test/energy_order/test_conformance.cljk
 (ns energy-order.test-conformance
   (:require [mio.methods.lexicon :as lex]
             [tawami.methods.tawami-edn :as tawami-edn]
