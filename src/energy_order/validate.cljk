@@ -16,7 +16,7 @@
 
   Pure / offline. A green run means no charter-gate has silently regressed across
   the suite. Reused as a regression guard (test_validate.cljc)."
-  (:require [clojure.edn :as edn]
+  (:require [kotoba.lang.edn :as edn]
             [clojure.java.io :as io]
             [kotoba.lang.text :as str]
             [mio.methods.mio-edn :as mio-edn]

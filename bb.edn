@@ -1,6 +1,11 @@
 {:paths ["src" "test"]
  :deps
- {com.etzhayyim/mio
+ {
+        ;; kotoba.lang.edn replaced clojure.edn here (2026-09-23). An explicit floor:
+        ;; tools.deps takes the NEWEST sha it is shown, and kbb resolves git deps
+        ;; only from nbb.edn, so every project file this repo has names it.
+        io.github.kotoba-lang/edn {:git/sha "79dba32c8892058842c57783f06a2dfe4601aeb0"}
+       com.etzhayyim/mio
   {:git/url "https://github.com/etzhayyim/com-etzhayyim-mio"
    :git/sha "a0b6697f3708d67e0bda2a23fe4ab853555aed0d"}
   com.etzhayyim/tawami
